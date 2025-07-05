@@ -12,6 +12,10 @@ import Footer from "./Footer/Footer";
 import Start from "./Start/Start";
 import Layout from "./Layout/Layout";
 import SignIn from "./SignIn/SignIn";
+import MovieSearch from "./components/MovieSearch";
+import TopRatedMovies from "./components/TopRatedMovies";
+import UpcomingMovies from "./components/UpcomingMovies";
+import TVShows from "./components/TVShows";
 import reportWebVitals from './reportWebVitals';
 
 let routers = createBrowserRouter([
@@ -21,17 +25,14 @@ let routers = createBrowserRouter([
     children: [
       { path: "", element: <Start /> },
       { path: "NavBar", element: <NavBar /> },
-
       { path: "Movies", element: <About /> },
-
+      { path: "TopRated", element: <TopRatedMovies /> },
+      { path: "Upcoming", element: <UpcomingMovies /> },
+      { path: "TVShows", element: <TVShows /> },
+      { path: "Search", element: <MovieSearch /> },
       { path: "SignUp", element: <SignUp /> },
-
       { path: "Home", element: <About /> },
-
-      { path: "Movies", element: <Start /> },
-
       { path: "Footer", element: <Footer /> },
-
       { path: "Regestier", element: <SignIn /> },
     ],
   },

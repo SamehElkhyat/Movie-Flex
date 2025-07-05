@@ -65,7 +65,39 @@ export default function App() {
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                             >
-                                Movies
+                                Trending
+                            </motion.span>
+                        </Link>
+                        <Link to="TopRated" className="nav-link">
+                            <motion.span 
+                                whileHover={{ scale: 1.1 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                                Top Rated
+                            </motion.span>
+                        </Link>
+                        <Link to="Upcoming" className="nav-link">
+                            <motion.span 
+                                whileHover={{ scale: 1.1 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                                Upcoming
+                            </motion.span>
+                        </Link>
+                        <Link to="TVShows" className="nav-link">
+                            <motion.span 
+                                whileHover={{ scale: 1.1 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                                TV Shows
+                            </motion.span>
+                        </Link>
+                        <Link to="Search" className="nav-link">
+                            <motion.span 
+                                whileHover={{ scale: 1.1 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                                Search
                             </motion.span>
                         </Link>
                         <Link to="Regestier" className="nav-link">
@@ -107,7 +139,11 @@ export default function App() {
                 }}
                 transition={{ duration: 0.3 }}
             >
-                <Link to="Movies" className="mobile-link">Movies</Link>
+                <Link to="Movies" className="mobile-link">Trending</Link>
+                <Link to="TopRated" className="mobile-link">Top Rated</Link>
+                <Link to="Upcoming" className="mobile-link">Upcoming</Link>
+                <Link to="TVShows" className="mobile-link">TV Shows</Link>
+                <Link to="Search" className="mobile-link">Search</Link>
                 <Link to="Regestier" className="mobile-link">Sign In</Link>
                 <Link to="SignUp" className="mobile-link">Sign Up</Link>
             </motion.div>

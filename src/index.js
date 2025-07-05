@@ -27,7 +27,7 @@ let routers = createBrowserRouter([
 
       { path: "Home", element: <About /> },
 
-      { index: "Movies", element: <Start /> },
+      { path: "Movies", element: <Start /> },
 
       { path: "Footer", element: <Footer /> },
 
@@ -38,9 +38,7 @@ let routers = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AnimatePresence>
     <RouterProvider router={routers}></RouterProvider>
-  </AnimatePresence>
 );
 
 reportWebVitals();

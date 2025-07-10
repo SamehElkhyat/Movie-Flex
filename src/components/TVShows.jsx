@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import WatchModal from './WatchModal';
 import './TVShows.css';
 
 const TVShows = () => {
@@ -10,6 +11,8 @@ const TVShows = () => {
   const [loading, setLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('popular');
+  const [watchModalOpen, setWatchModalOpen] = useState(false);
+  const [selectedShow, setSelectedShow] = useState(null);
 
   const categories = [
     { id: 'popular', name: 'Popular', endpoint: 'popular' },
@@ -52,6 +55,16 @@ const TVShows = () => {
     if (page > 1) {
       setPage(page - 1);
     }
+  };
+
+  const handleWatch = (show) => {
+    setSelectedShow(show);
+    setWatchModalOpen(true);
+  };
+
+  const closeWatchModal = () => {
+    setWatchModalOpen(false);
+    setSelectedShow(null);
   };
 
   const formatDate = (dateString) => {
@@ -172,14 +185,17 @@ const TVShows = () => {
                       }
                     </p>
                     <div className="show-actions">
-                      <button className="btn-watch">
+                      <button 
+                        className="btn-watch"
+                        onClick={() => handleWatch(show)}
+                      >
                         <i className="fas fa-play"></i>
                         Watch
                       </button>
-                      <button className="btn-details">
+                      <Link to={`/details/${show.id}`} className="btn-details">
                         <i className="fas fa-info-circle"></i>
                         Details
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -213,6 +229,12 @@ const TVShows = () => {
           <i className="fas fa-chevron-right"></i>
         </button>
       </motion.div>
+
+      <WatchModal 
+        isOpen={watchModalOpen} 
+        onClose={closeWatchModal} 
+        show={selectedShow} 
+      />
     </div>
   );
 };

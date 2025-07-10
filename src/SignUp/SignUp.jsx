@@ -228,7 +228,7 @@ export default function SignUp() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            <p>Already have an account? <Link to="Regestier" className="link-signin">Sign in</Link></p>
+            <p>Already have an account? <Link to="/Regestier" className="link-signin">Sign in</Link></p>
           </motion.div>
         </div>
       </motion.div>

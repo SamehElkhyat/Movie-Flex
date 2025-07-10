@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import WatchModal from './WatchModal';
 import './TopRatedMovies.css';
 
 const TopRatedMovies = () => {
@@ -9,6 +10,8 @@ const TopRatedMovies = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(0);
+  const [watchModalOpen, setWatchModalOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const fetchTopRatedMovies = async (pageNum = 1) => {
     setLoading(true);
@@ -39,6 +42,16 @@ const TopRatedMovies = () => {
     if (page > 1) {
       setPage(page - 1);
     }
+  };
+
+  const handleWatch = (movie) => {
+    setSelectedMovie(movie);
+    setWatchModalOpen(true);
+  };
+
+  const closeWatchModal = () => {
+    setWatchModalOpen(false);
+    setSelectedMovie(null);
   };
 
   const containerVariants = {
@@ -125,14 +138,17 @@ const TopRatedMovies = () => {
                       }
                     </p>
                     <div className="movie-actions">
-                      <button className="btn-watch">
+                      <button 
+                        className="btn-watch"
+                        onClick={() => handleWatch(movie)}
+                      >
                         <i className="fas fa-play"></i>
                         Watch
                       </button>
-                      <button className="btn-details">
+                      <Link to={`/details/${movie.id}`} className="btn-details">
                         <i className="fas fa-info-circle"></i>
                         Details
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -166,6 +182,12 @@ const TopRatedMovies = () => {
           <i className="fas fa-chevron-right"></i>
         </button>
       </motion.div>
+
+      <WatchModal
+        isOpen={watchModalOpen}
+        onClose={closeWatchModal}
+        movie={selectedMovie}
+      />
     </div>
   );
 };

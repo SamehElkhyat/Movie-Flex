@@ -2,16 +2,38 @@ import React from "react";
 import axios from "axios";
 import "./About.css";
 import { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { motion} from "framer-motion";
 import Sidebarr from '../Sidebarr/sidebar'
+import WatchModal from '../components/WatchModal'
 
 export default function Home() {
   const [trendingmovies, setTrendingmovie] = useState([]);
   const [page, setPagination] = useState(1);
   const [showSide, setShowside] = useState(false);
   const [loading, setLoading] = useState(true);
-  
+  const [watchModalOpen, setWatchModalOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const navigate = useNavigate();
+
+const Details =  (id) => {
+  navigate(`/details/${id}`)
+}
+
+const watch = async (movie) => {
+  setSelectedMovie(movie);
+  setWatchModalOpen(true);
+}
+
+const closeWatchModal = () => {
+  setWatchModalOpen(false);
+  setSelectedMovie(null);
+}
+
+const openStreamingService = (url) => {
+  window.open(url, '_blank');
+}
+
   const plusPage = () => {
     if (page >= 1) {
       setPagination(page + 1);
@@ -126,18 +148,16 @@ export default function Home() {
                     </p>
                     <div className="movie-actions">
                       <Link 
-                        to={`http://www.rottentomatoes.com/m/${movie.title}`}
+                        onClick={() => watch(movie)}
                         className="btn-watch"
-                        target="_blank"
-                        rel="noopener noreferrer"
                       >
                         <i className="fas fa-play"></i>
                         Watch
                       </Link>
-                      <button className="btn-details">
+                      <Link to={`/details/${movie.id}`} className="btn-details">
                         <i className="fas fa-info-circle"></i>
                         Details
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -170,6 +190,12 @@ export default function Home() {
           <i className="fas fa-chevron-right"></i>
         </button>
       </motion.div>
+
+      <WatchModal
+        isOpen={watchModalOpen}
+        onClose={closeWatchModal}
+        movie={selectedMovie}
+      />
     </div>
   );
 }

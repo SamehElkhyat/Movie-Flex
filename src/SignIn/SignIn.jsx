@@ -17,7 +17,7 @@ export default function SignIn() {
       const users = await axios.post(`http://localhost:3007/signin`, values);
       if (users.data === 'success') {
         alert('Welcome! You have successfully signed in.');
-        window.location.href = '/movies/Home';
+        window.location.href = '/movies';
       } else {
         setError('Invalid email or password. Please try again.');
       }
@@ -145,7 +145,7 @@ export default function SignIn() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            <p>Don't have an account? <Link to="SignUp" className="link-signup">Sign up</Link></p>
+            <p>Don't have an account? <Link to="/SignUp" className="link-signup">Sign up</Link></p>
           </motion.div>
         </div>
       </motion.div>

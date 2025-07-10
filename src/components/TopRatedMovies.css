@@ -176,6 +176,7 @@
   align-items: center;
   gap: 0.4rem;
   font-weight: 500;
+  text-decoration: none;
 }
 
 .btn-watch {

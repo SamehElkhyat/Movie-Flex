@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import WatchModal from './WatchModal';
 import './MovieSearch.css';
 
 const MovieSearch = () => {
@@ -9,6 +10,8 @@ const MovieSearch = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [watchModalOpen, setWatchModalOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const searchMovies = async (query) => {
     if (!query.trim()) return;
@@ -38,6 +41,16 @@ const MovieSearch = () => {
       setSearchResults([]);
       setSearched(false);
     }
+  };
+
+  const handleWatch = (movie) => {
+    setSelectedMovie(movie);
+    setWatchModalOpen(true);
+  };
+
+  const closeWatchModal = () => {
+    setWatchModalOpen(false);
+    setSelectedMovie(null);
   };
 
   return (
@@ -146,14 +159,17 @@ const MovieSearch = () => {
                           }
                         </p>
                         <div className="result-actions">
-                          <button className="btn-watch">
+                          <button 
+                            className="btn-watch"
+                            onClick={() => handleWatch(movie)}
+                          >
                             <i className="fas fa-play"></i>
                             Watch
                           </button>
-                          <button className="btn-details">
+                          <Link to={`/details/${movie.id}`} className="btn-details">
                             <i className="fas fa-info-circle"></i>
                             Details
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -164,6 +180,12 @@ const MovieSearch = () => {
           )}
         </motion.div>
       )}
+
+      <WatchModal
+        isOpen={watchModalOpen}
+        onClose={closeWatchModal}
+        movie={selectedMovie}
+      />
     </div>
   );
 };

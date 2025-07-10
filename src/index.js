@@ -16,6 +16,7 @@ import MovieSearch from "./components/MovieSearch";
 import TopRatedMovies from "./components/TopRatedMovies";
 import UpcomingMovies from "./components/UpcomingMovies";
 import TVShows from "./components/TVShows";
+import Details from "./Details/Details";
 import reportWebVitals from './reportWebVitals';
 
 let routers = createBrowserRouter([
@@ -34,6 +35,7 @@ let routers = createBrowserRouter([
       { path: "Home", element: <About /> },
       { path: "Footer", element: <Footer /> },
       { path: "Regestier", element: <SignIn /> },
+      { path: "details/:id", element: <Details /> },
     ],
   },
 ]);
